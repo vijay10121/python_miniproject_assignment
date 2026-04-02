@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Site{% endblock %}</title>
+</head>
+<body>
+
+    {% block content %}
+    
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer style="position:fixed; bottom:0; width:100%; background:#eee; padding:10px; text-align:center;">
+        <a href="{% url 'products' %}">Home</a> |
+        <a href="{% url 'cart' %}">Cart</a> |
+        <a href="{% url 'user' %}">User</a>
+    </footer>
+
+</body>
+</html>

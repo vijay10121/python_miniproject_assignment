@@ -33,3 +33,13 @@ def signup(request):
         return redirect('login')
 
     return render(request, 'store/signup.html', {'form': form})
+
+
+def user_page(request):
+    return render(request, 'store/user.html')
+
+@login_required
+def remove_from_cart(request, item_id):
+    item = get_object_or_404(Cart, id=item_id, user=request.user)
+    item.delete()
+    return redirect('cart')

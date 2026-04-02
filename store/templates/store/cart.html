@@ -1,5 +1,21 @@
-<h1>Your Cart</h1>
+{% extends 'store/base.html' %}
 
-{% for item in items %}
-    <p>{{ item.product.name }} - {{ item.quantity }}</p>
-{% endfor %}
+{% block title %}cart page{% endblock %}
+    
+{% block content %}
+    <h1>Your Cart</h1>
+    {% if not items %}
+    <p>Sorry! Your cart is empty right now, please add products.</p>
+    {% endif %}
+    {% for item in items %}
+    <p>
+        {{ item.product.name }} - {{ item.quantity }}
+        
+        <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
+    </p>
+    {% endfor %}
+{% endblock %}
+
+
+
+

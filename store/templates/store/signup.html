@@ -1,7 +1,45 @@
-<h2>Signup</h2>
+{% extends 'store/base.html' %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Signup</button>
-</form>
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <h2>Create Account</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.errors }}
+            <div class="form-group">
+                <label>Username</label><br>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label>Password</label><br>
+                {{ form.password1 }}
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password</label><br>
+                {{ form.password2 }}
+            </div>
+
+            <button type="submit" class="btn">
+                Signup
+            </button>
+        </form>
+
+        <p style="margin-top: 10px;">
+            Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

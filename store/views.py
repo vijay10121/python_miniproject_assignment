@@ -3,6 +3,7 @@ from .models import Product,Cart
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
+from .forms import SignupForm
 
 def product_list(request):
     products = Product.objects.all()
@@ -26,11 +27,13 @@ def cart_view(request):
 from django.contrib.auth.forms import UserCreationForm
 
 def signup(request):
-    form = UserCreationForm(request.POST or None)
-
-    if form.is_valid():
-        form.save()
-        return redirect('login')
+    if request.method == "POST":
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()   
+            return redirect('login')
+    else:
+        form = SignupForm()
 
     return render(request, 'store/signup.html', {'form': form})
 
@@ -43,3 +46,7 @@ def remove_from_cart(request, item_id):
     item = get_object_or_404(Cart, id=item_id, user=request.user)
     item.delete()
     return redirect('cart')
+
+def show_productDetails(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, 'store/productDetails.html', {'product': product})

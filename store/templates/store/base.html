@@ -1,19 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}My Site{% endblock %}</title>
+    <title>{% block title %}My Store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
 
-    {% block content %}
-    
-    {% endblock %}
+    <!-- Header -->
+    <header>
+        <h1>My Store</h1>
+        <nav>
+            <a href="{% url 'products' %}">Home</a>
+            <a href="{% url 'cart' %}">Cart</a>
+            <a href="{% url 'user' %}">User</a>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 
     <!-- Footer -->
-    <footer style="position:fixed; bottom:0; width:100%; background:#eee; padding:10px; text-align:center;">
-        <a href="{% url 'products' %}">Home</a> |
-        <a href="{% url 'cart' %}">Cart</a> |
-        <a href="{% url 'user' %}">User</a>
+    <footer>
+        <p>Built with Django</p>
     </footer>
 
 </body>

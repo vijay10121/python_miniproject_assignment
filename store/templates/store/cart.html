@@ -1,21 +1,43 @@
 {% extends 'store/base.html' %}
 
-{% block title %}cart page{% endblock %}
+{% block title %}Cart{% endblock %}
     
 {% block content %}
-    <h1>Your Cart</h1>
-    {% if not items %}
-    <p>Sorry! Your cart is empty right now, please add products.</p>
-    {% endif %}
+
+<h1>Your Cart</h1>
+
+{% if not items %}
+    <p class="empty-cart">Sorry! Your cart is empty right now, please add products.</p>
+{% else %}
+
+<div class="cart-container">
+
     {% for item in items %}
-    <p>
-        {{ item.product.name }} - {{ item.quantity }}
-        
-        <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
-    </p>
+
+    <div class="cart-item">
+
+        <div class="cart-img">
+            {% if item.product.image %}
+                <img src="{{ item.product.image.url }}">
+            {% endif %}
+        </div>
+
+        <div class="cart-details">
+            <h3>{{ item.product.name }}</h3>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p class="price">₹{{ item.product.price }}</p>
+
+            <a href="{% url 'remove_from_cart' item.id %}" class="remove-btn">
+                Remove
+            </a>
+        </div>
+
+    </div>
+
     {% endfor %}
+
+</div>
+
+{% endif %}
+
 {% endblock %}
-
-
-
-

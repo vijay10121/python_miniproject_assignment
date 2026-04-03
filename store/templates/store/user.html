@@ -1,25 +1,39 @@
 {% extends 'store/base.html' %}
 
-{% block title %}user profile{% endblock %}
-    
+{% block title %}Profile{% endblock %}
+
 {% block content %}
-    <h1>Your Profile</h1>
+
+<div class="profile-container">
+
     {% if user.is_authenticated %}
 
-    <h2>Welcome, {{ user.username }}</h2>
+        <h2>Welcome, {{ user.username }} 👋</h2>
 
-    <form action="/logout/" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
+        <div class="profile-card">
+            <p><strong>Username:</strong> {{ user.username }}</p>
+
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn logout-btn">
+                    Logout
+                </button>
+            </form>
+        </div>
 
     {% else %}
 
-    <h2>You are not logged in</h2>
+        <div class="profile-card">
+            <h2>You are not logged in</h2>
 
-    <a href="/login/">Login</a>
-    <a href="/signup/">Signup</a>
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}" class="btn">Login</a>
+                <a href="{% url 'signup' %}" class="btn secondary-btn">Signup</a>
+            </div>
+        </div>
 
     {% endif %}
-    
+
+</div>
+
 {% endblock %}
